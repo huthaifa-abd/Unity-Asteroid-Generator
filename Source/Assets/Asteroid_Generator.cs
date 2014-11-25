@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
+using System.Linq;
 
 [ExecuteInEditMode]
 public class Asteroid_Generator : MonoBehaviour
 {
+
     public GameObject[] SamplePrefab;
     public int NoiseValue = 3;
     public int XRange = 10;
@@ -11,13 +14,25 @@ public class Asteroid_Generator : MonoBehaviour
     public int YIncrement = 2;
     public int XIncrement = 3;
 
-    public int count = 0;
 
     void Update()
     {
+    }
+
+    public void funcClearAsteroid()
+    {
+        var tempList = transform.Cast<Transform>().ToList();
+        foreach (var child in tempList)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+ 
+    }
+    public void funcGenerateAsteroid()
+    {
         GameObject AsteroidPrefab = SamplePrefab[0];
 
-        if (AsteroidPrefab != null && count == 0)
+        if (AsteroidPrefab != null)
         {
             Vector3 OriginalPos = transform.position;
             Vector3 YMovement = OriginalPos;
@@ -89,10 +104,8 @@ public class Asteroid_Generator : MonoBehaviour
             YMovement = OriginalPos;
 
 
-            count = 1;
+    
         }
-
-
     }
 
     private Vector3 InstantiateAsteroid(GameObject AsteroidPrefab, Vector3 YMovement)
