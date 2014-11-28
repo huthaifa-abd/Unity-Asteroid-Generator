@@ -13,7 +13,10 @@ public class Asteroid_Generator : MonoBehaviour
     public int YRange = 10;
     public int YIncrement = 2;
     public int XIncrement = 3;
-
+    public bool SetRandomSizes = false;
+    public float MaxAsteroidSize = 1;
+    public float MinAsteroidSize = 0.1f;
+    
 
     void Update()
     {
@@ -26,7 +29,7 @@ public class Asteroid_Generator : MonoBehaviour
         {
             DestroyImmediate(child.gameObject);
         }
- 
+
     }
     public void funcGenerateAsteroid()
     {
@@ -104,7 +107,7 @@ public class Asteroid_Generator : MonoBehaviour
             YMovement = OriginalPos;
 
 
-    
+
         }
     }
 
@@ -115,16 +118,32 @@ public class Asteroid_Generator : MonoBehaviour
         {
             //Generate Random Prefab
             int SelectedIndex = Random.Range(0, SamplePrefab.Length);
-            Asteroid = Instantiate(SamplePrefab[SelectedIndex], YMovement, transform.rotation) as GameObject;
+            Asteroid = Instantiate(SamplePrefab[SelectedIndex], YMovement, Random.rotation) as GameObject;
             Asteroid.transform.parent = transform;
+
+            //Generate Random Size
+            if (SetRandomSizes)
+            {
+                float RandomSize = Random.RandomRange(MinAsteroidSize, MaxAsteroidSize);
+                Asteroid.transform.localScale += new Vector3(RandomSize, RandomSize, RandomSize);
+            }
 
         }
         else
         {
 
-            Asteroid = Instantiate(AsteroidPrefab, YMovement, transform.rotation) as GameObject;
+            Asteroid = Instantiate(AsteroidPrefab, YMovement, Random.rotation) as GameObject;
             Asteroid.transform.parent = transform;
+
+            //Generate Random Size
+            if (SetRandomSizes)
+            {
+                float RandomSize = Random.RandomRange(MinAsteroidSize, MaxAsteroidSize);
+                Asteroid.transform.localScale += new Vector3(RandomSize, RandomSize, RandomSize);
+            }
         }
         return YMovement;
     }
+
+
 }
