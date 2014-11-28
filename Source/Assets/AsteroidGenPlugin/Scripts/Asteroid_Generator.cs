@@ -7,7 +7,7 @@ using System.Linq;
 public class Asteroid_Generator : MonoBehaviour
 {
 
-    public GameObject[] SamplePrefab;
+    public GameObject[] AsteroidModelsList;
     public int NoiseValue = 3;
     public int XRange = 10;
     public int YRange = 10;
@@ -16,6 +16,8 @@ public class Asteroid_Generator : MonoBehaviour
     public bool SetRandomSizes = false;
     public float MaxAsteroidSize = 1;
     public float MinAsteroidSize = 0.1f;
+    public bool SetAnimation = false;
+    public int AnimationSpeed = 1;
     
 
     void Update()
@@ -33,7 +35,7 @@ public class Asteroid_Generator : MonoBehaviour
     }
     public void funcGenerateAsteroid()
     {
-        GameObject AsteroidPrefab = SamplePrefab[0];
+        GameObject AsteroidPrefab = AsteroidModelsList[0];
 
         if (AsteroidPrefab != null)
         {
@@ -114,11 +116,11 @@ public class Asteroid_Generator : MonoBehaviour
     private Vector3 InstantiateAsteroid(GameObject AsteroidPrefab, Vector3 YMovement)
     {
         GameObject Asteroid;
-        if (SamplePrefab.Length > 0)
+        if (AsteroidModelsList.Length > 0)
         {
             //Generate Random Prefab
-            int SelectedIndex = Random.Range(0, SamplePrefab.Length);
-            Asteroid = Instantiate(SamplePrefab[SelectedIndex], YMovement, Random.rotation) as GameObject;
+            int SelectedIndex = Random.Range(0, AsteroidModelsList.Length);
+            Asteroid = Instantiate(AsteroidModelsList[SelectedIndex], YMovement, Random.rotation) as GameObject;
             Asteroid.transform.parent = transform;
 
             //Generate Random Size
@@ -126,6 +128,15 @@ public class Asteroid_Generator : MonoBehaviour
             {
                 float RandomSize = Random.RandomRange(MinAsteroidSize, MaxAsteroidSize);
                 Asteroid.transform.localScale += new Vector3(RandomSize, RandomSize, RandomSize);
+            }
+
+            // Attach Animation Script
+            if (SetAnimation)
+            {
+                Asteroid.AddComponent<AsteroidAnimation>();
+                //Get Asteroid Animaion Handler
+                AsteroidAnimation AstAnim = Asteroid.GetComponent<AsteroidAnimation>();
+                AstAnim.speed = AnimationSpeed;
             }
 
         }
@@ -141,6 +152,16 @@ public class Asteroid_Generator : MonoBehaviour
                 float RandomSize = Random.RandomRange(MinAsteroidSize, MaxAsteroidSize);
                 Asteroid.transform.localScale += new Vector3(RandomSize, RandomSize, RandomSize);
             }
+
+            // Attach Animation Script
+            if (SetAnimation)
+            {
+                Asteroid.AddComponent<AsteroidAnimation>();
+                //Get Asteroid Animaion Handler
+                AsteroidAnimation AstAnim = Asteroid.GetComponent<AsteroidAnimation>();
+                AstAnim.speed = AnimationSpeed;
+            }
+
         }
         return YMovement;
     }
