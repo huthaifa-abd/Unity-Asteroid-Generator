@@ -5,6 +5,8 @@ using UnityEditor;
 [CustomEditor(typeof(Asteroid_Generator))]
 class AsteroidGeneratorEditior : Editor
 {
+    public GameObject objGizmo;
+    public bool _issub = false;
     public override void OnInspectorGUI()
     {
 
@@ -34,8 +36,28 @@ class AsteroidGeneratorEditior : Editor
             ScriptHandler.funcClearAsteroid();
         }
 
+        GUILayout.Label("Gizmo Configuration");
+        GUILayout.Label("Used to add or subtract asteroid regions");
 
         
+       objGizmo = (GameObject)EditorGUILayout.ObjectField("Gizmo Mesh", objGizmo, typeof(GameObject), true);
+       _issub = EditorGUILayout.Toggle("Subtract Region", _issub);
+
+        if (GUILayout.Button("Apply Gizmo"))
+        {
+            Asteroid_Generator ScriptHandler = (Asteroid_Generator)target;
+            //Apply Gizmo Collision
+            if (objGizmo != null)
+            {
+                //Set Gizmo Layermask
+                objGizmo.layer = 8;
+                ScriptHandler.funcApplyGizmo(objGizmo.name, 1000f, objGizmo.collider, _issub);
+            }
+            else
+                Debug.LogError("Gizmo Object is null , make sure its avaliable");
+            
+        }
+       
         GUILayout.Label("Asteroid Generation Plugin v0.1");
 
         
