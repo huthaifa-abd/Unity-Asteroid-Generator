@@ -1,4 +1,4 @@
-# Asteroid Generator Plugin
+# Asteroid Generator Plugin Unity3D
 ![alt tag](https://github.com/huthaifa-abd/Unity-Asteroid-Generator/blob/develop/Docs/Images/Logo.png?raw=true)
 
 A simplified plugin for generating fast asteroid Fields for space games , to be used in unity engine
