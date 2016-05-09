@@ -1,7 +1,7 @@
 # Asteroid Generator Plugin Unity3D
 ![alt tag](https://github.com/huthaifa-abd/Unity-Asteroid-Generator/blob/develop/Docs/Images/Logo.png?raw=true)
 
-A simplified plugin for generating fast asteroid Fields for space games , to be used in unity engine
+A useful plugin for generating fast asteroid Fields for space games , to be used in unity engine
 
   - Generate Random Asteroid Fields
   - Wide Range of Randomization Controls
@@ -13,7 +13,7 @@ You can also:
   - Modify the filed after generation in any way 
   - The plugin comes with nice asteroid animation script
 
-This plugin has been developed to be used in any game to generate randomize elements location in a predefined range , it can even be used in real time , i usually use it with generating asteroid fields for my space games . 
+This plugin has been developed to be used in any game to generate randomize elements location / size in a predefined range , it can even be used in real time , i usually use it with generating asteroid fields for my space games . 
 
 >The plugin still needs lots of updates and improvements , feel free to contribute to the code and fix bugs if you found any. 
 
@@ -54,7 +54,6 @@ From the menu:
 * enter context menu -> Import Package...
 
 Then, in both cases, find the standard packages:
-* browse to the package you need
 * Browser to the path where you cloned or downloaded the package and select it .
 
 You can also navigate to the needed package:
